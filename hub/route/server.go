@@ -374,6 +374,20 @@ func traffic(w http.ResponseWriter, r *http.Request) {
 		render.Status(r, http.StatusOK)
 	}
 
+	// 兼容不支持 WebSocket 的设备，使用 ?once=true 即时返回当前数据
+	if wsConn == nil && r.URL.Query().Get("once") == "true" {
+		t := statistic.DefaultManager
+		up, down := t.Now()
+		upTotal, downTotal := t.Total()
+		json.NewEncoder(w).Encode(Traffic{
+			Up:        up,
+			Down:      down,
+			UpTotal:   upTotal,
+			DownTotal: downTotal,
+		})
+		return
+	}
+
 	tick := time.NewTicker(time.Second)
 	defer tick.Stop()
 	t := statistic.DefaultManager
