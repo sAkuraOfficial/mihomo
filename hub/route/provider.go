@@ -56,13 +56,13 @@ func updateProvider(w http.ResponseWriter, r *http.Request) {
 		render.JSON(w, r, newError(err.Error()))
 		return
 	}
-	render.NoContent(w, r)
+	render.JSON(w, r, render.M{"message": "ok"})
 }
 
 func healthCheckProvider(w http.ResponseWriter, r *http.Request) {
 	provider := r.Context().Value(CtxKeyProvider).(P.ProxyProvider)
 	provider.HealthCheck()
-	render.NoContent(w, r)
+	render.JSON(w, r, render.M{"message": "ok"})
 }
 
 func parseProviderName(next http.Handler) http.Handler {
@@ -134,7 +134,7 @@ func updateRuleProvider(w http.ResponseWriter, r *http.Request) {
 		render.JSON(w, r, newError(err.Error()))
 		return
 	}
-	render.NoContent(w, r)
+	render.JSON(w, r, render.M{"message": "ok"})
 }
 
 func parseRuleProviderName(next http.Handler) http.Handler {

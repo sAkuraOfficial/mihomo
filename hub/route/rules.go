@@ -95,5 +95,5 @@ func disableRules(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	render.NoContent(w, r)
+	render.JSON(w, r, render.M{"message": "ok"})
 }

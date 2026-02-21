@@ -369,7 +369,7 @@ func patchConfigs(w http.ResponseWriter, r *http.Request) {
 		resolver.DisableIPv6 = !*general.IPv6
 	}
 
-	render.NoContent(w, r)
+	render.JSON(w, r, render.M{"message": "ok"})
 }
 
 func updateConfigs(w http.ResponseWriter, r *http.Request) {
@@ -420,7 +420,7 @@ func updateConfigs(w http.ResponseWriter, r *http.Request) {
 	}
 
 	executor.ApplyConfig(cfg, force)
-	render.NoContent(w, r)
+	render.JSON(w, r, render.M{"message": "ok"})
 }
 
 func updateGeoDatabases(w http.ResponseWriter, r *http.Request) {
@@ -432,5 +432,5 @@ func updateGeoDatabases(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	render.NoContent(w, r)
+	render.JSON(w, r, render.M{"message": "ok"})
 }

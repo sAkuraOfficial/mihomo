@@ -75,7 +75,7 @@ func closeConnection(w http.ResponseWriter, r *http.Request) {
 	if c := statistic.DefaultManager.Get(id); c != nil {
 		_ = c.Close()
 	}
-	render.NoContent(w, r)
+	render.JSON(w, r, render.M{"message": "ok"})
 }
 
 func closeAllConnections(w http.ResponseWriter, r *http.Request) {
@@ -83,5 +83,5 @@ func closeAllConnections(w http.ResponseWriter, r *http.Request) {
 		_ = c.Close()
 		return true
 	})
-	render.NoContent(w, r)
+	render.JSON(w, r, render.M{"message": "ok"})
 }

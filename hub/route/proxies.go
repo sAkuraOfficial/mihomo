@@ -100,7 +100,7 @@ func updateProxy(w http.ResponseWriter, r *http.Request) {
 		// refresh tray menu
 		go SwitchProxiesCallback(proxy.Name(), req.Name)
 	}
-	render.NoContent(w, r)
+	render.JSON(w, r, render.M{"message": "ok"})
 }
 
 func getProxyDelay(w http.ResponseWriter, r *http.Request) {
@@ -152,7 +152,7 @@ func unfixedProxy(w http.ResponseWriter, r *http.Request) {
 	if selectAble, ok := proxy.Adapter().(outboundgroup.SelectAble); ok && proxy.Type() != C.Selector {
 		selectAble.ForceSet("")
 		cachefile.Cache().SetSelected(proxy.Name(), "")
-		render.NoContent(w, r)
+		render.JSON(w, r, render.M{"message": "ok"})
 		return
 	}
 	render.Status(r, http.StatusBadRequest)
