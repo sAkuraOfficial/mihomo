@@ -22,10 +22,10 @@ func flushFakeIPPool(w http.ResponseWriter, r *http.Request) {
 		render.JSON(w, r, newError(err.Error()))
 		return
 	}
-	render.NoContent(w, r, render.M{"message": "ok"})
+	render.JSON(w, r, render.M{"message": "ok"})
 }
 
 func flushDnsCache(w http.ResponseWriter, r *http.Request) {
 	resolver.ClearCache()
-	render.NoContent(w, r, render.M{"message": "ok"})
+	render.JSON(w, r, render.M{"message": "ok"})
 }
