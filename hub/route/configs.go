@@ -29,6 +29,7 @@ func configRouter() http.Handler {
 		r.Put("/", updateConfigs)
 		r.Post("/geo", updateGeoDatabases)
 		r.Patch("/", patchConfigs)
+		r.Post("/patch", patchConfigs) // POST alternative for clients that don't support PATCH method
 	}
 	return r
 }
